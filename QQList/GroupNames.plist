@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>我的网友</key>
+	<array>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+	</array>
+	<key>我的朋友</key>
+	<array>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+	</array>
+	<key>我的同学</key>
+	<array>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+	</array>
+	<key>我的家人</key>
+	<array>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+	</array>
+	<key>陌生人</key>
+	<array>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+		<string>好友</string>
+	</array>
+</dict>
+</plist>
