@@ -16,8 +16,10 @@
 {
     IBOutlet UIView *inputArea;
     IBOutlet UITableView *chattingTableView;
-    NSMutableArray *chattHistory;
+    IBOutlet UITextField *msgTextField;
+    NSMutableArray *chattingHistory;
 }
 @property (retain, nonatomic) IBOutlet BubbleCell *bubbleCell;
+- (IBAction)sendMessage:(id)sender;
 
 @end

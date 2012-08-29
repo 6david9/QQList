@@ -8,6 +8,7 @@
 
 #import "ChatViewController.h"
 #import "BubbleCell.h"
+#import "ChattingData.h"
 
 #define needGenerateHistory 1           // 1 生成伪造聊天纪录
                                         // 0 不生成伪造聊天纪录
@@ -17,6 +18,8 @@
 // 显示或隐藏inputView(默认系统键盘)时，改变布局
 - (void)changeLayoutFrame;
 
+- (void)scrollViewToEnd;
+
 @end
 
 @implementation ChatViewController
@@ -25,16 +28,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    chattHistory = [[NSMutableArray alloc] initWithCapacity:10];
     
     // 注册观察者，监视键盘状态通知
     // 键盘状态通知由 UIWindow 实例发送
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLayoutFrame:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLayoutFrame:) name:UIKeyboardWillHideNotification object:nil];
-
- 
+    // 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeLayoutFrame:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeLayoutFrame:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    // 为chattingHistory分配内存
+    chattingHistory = [[NSMutableArray alloc] initWithCapacity:10];
+    
 #if needGenerateHistory
     @autoreleasepool {
         
@@ -44,16 +53,24 @@
             
             if (i % 2 == 0) {   // 奇数行
                 
-                dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"me:bla bla bla", ME, nil];
+                ChattingData *newData = [[ChattingData alloc] initWithWords:@"me:bla bla bla" Character:ChattingCharacterMe];
+                dict = [[NSDictionary alloc] initWithObjectsAndKeys:newData, ME, nil];
+                [newData release];
                 
             } else {            // 偶数行
                 
-                dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"other:bla bla bla", OTHER, nil];
-                
+                ChattingData *newData = [[ChattingData alloc] initWithWords:@"other:bla bla bla" Character:ChattingCharacterOther];
+                dict = [[NSDictionary alloc] initWithObjectsAndKeys:newData, OTHER, nil];
+                [newData release];
             }
             
-            [chattHistory addObject:dict];
+            [chattingHistory addObject:dict];
         }
+        
+    for (NSDictionary *data in chattingHistory) {
+        NSString *key = [[data allKeys] lastObject];
+        NSLog(@"%@", [[data valueForKey:key] words]);
+    }
         
     }
 #endif
@@ -62,7 +79,7 @@
 
 - (void)viewDidUnload
 {
-    [chattHistory release], chattHistory = nil;
+    [chattingHistory release], chattingHistory = nil;
     [self setBubbleCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -142,7 +159,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [chattHistory count];
+    return [chattingHistory count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSUInteger row = [indexPath row];
+//    
+//    NSDictionary *chatData = [chattingHistory objectAtIndex:row];
+//    NSString *key = [[chatData allKeys] lastObject];
+//    
+//    NSString *tmpWords = [[chatData valueForKey:key] words];
+//    
+//    CGSize wordsSize = [tmpWords sizeWithFont:[UIFont systemFontOfSize:16.0f]
+//                         constrainedToSize:CGSizeMake(200.0f, 2000.0f)
+//                             lineBreakMode:UILineBreakModeWordWrap];
+    
+    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,10 +190,12 @@
     }
     
     NSUInteger row = [indexPath row];
-    NSDictionary *chattingDict = [chattHistory objectAtIndex:row];
     
-    NSString *key = (row % 2 == 0) ? ME : OTHER;
-    [cell setWords:[chattingDict valueForKey:key] fromSelf:NO];
+    NSDictionary *chatData = [chattingHistory objectAtIndex:row];
+    NSString *key = [[chatData allKeys] lastObject];
+    
+    [cell setWords:[[chatData valueForKey:key] words] fromSelf:NO];
+    
     
     return cell;
 }
@@ -174,8 +209,28 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
     return YES;
 }
 
+#pragma mark - Customed methods
+- (IBAction)sendMessage:(id)sender
+{
+    ChattingData *newData = [[ChattingData alloc] initWithWords:[msgTextField text] Character:ChattingCharacterMe];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:newData, ME, nil];
+    
+    [chattingHistory addObject:dict];
+    [newData release];
+    [dict release];
+    
+    [chattingTableView reloadData];
+    [self scrollViewToEnd];
+}
 
+- (void)scrollViewToEnd
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chattingHistory count]-1 inSection:0];
+    
+    [chattingTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
 @end

@@ -50,6 +50,7 @@
     UIImage *backgroundImage = [UIImage imageNamed:@"bgd.png"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
     [self.tableView setBackgroundView:backgroundView];
+    [backgroundView release];
     
     // 设置表格单元格分隔线
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -209,6 +210,7 @@
                                                                                   bundle:nil];
     
     [self.navigationController pushViewController:chatViewController animated:YES];
+    [chatViewController release];
 }
 
 #pragma mark - Customed methods

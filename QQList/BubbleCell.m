@@ -34,7 +34,9 @@
 - (void)setWords:(NSString *) words fromSelf:(BOOL)flag
 {
     
-    CGSize wordsSize = [words sizeWithFont:[UIFont systemFontOfSize:16.0f] constrainedToSize:CGSizeMake(200.0f, 2000.0f) lineBreakMode:UILineBreakModeWordWrap];
+    CGSize wordsSize = [words sizeWithFont:[UIFont systemFontOfSize:16.0f]
+                         constrainedToSize:CGSizeMake(200.0f, 2000.0f)
+                             lineBreakMode:UILineBreakModeWordWrap];
     
     if (flag) {
         self.bubbleImage = [UIImage imageNamed:@"bubbleSelf.png"];

@@ -30,6 +30,8 @@
                                              initWithRootViewController:friendGroupViewController];
     // 设置根视图控制器
     self.window.rootViewController = navController;
+    [navController release];
+    [friendGroupViewController release];
     
     [self.window makeKeyAndVisible];
     return YES;
