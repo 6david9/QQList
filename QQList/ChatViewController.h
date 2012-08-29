@@ -12,10 +12,10 @@
 #define OTHER (@"other")
 
 @class BubbleCell;
-@interface ChatViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController < UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
-    IBOutlet UIView *myInputView;
-    IBOutlet UITableView *myTableView;
+    IBOutlet UIView *inputArea;
+    IBOutlet UITableView *chattingTableView;
     NSMutableArray *chattHistory;
 }
 @property (retain, nonatomic) IBOutlet BubbleCell *bubbleCell;
