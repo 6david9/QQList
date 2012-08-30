@@ -46,7 +46,10 @@
 								<string key="NSFrame">{{20, 4}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="99969394"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="1012991398"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIAutoresizesSubviews">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -105,6 +108,8 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="99969394"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<bool key="IBUIOpaque">NO</bool>
+				<bool key="IBUIClipsSubviews">YES</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="99969394"/>
 				<string key="IBUIReuseIdentifier">BubbleCell</string>
@@ -160,8 +165,8 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="817858664"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="463928997"/>
 							<reference ref="1012991398"/>
+							<reference ref="463928997"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -220,23 +225,39 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ChatViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">sendMessage:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">sendMessage:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">sendMessage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bubbleCell">BubbleCell</string>
-						<string key="myInputView">UIView</string>
-						<string key="myTableView">UITableView</string>
+						<string key="chattingTableView">UITableView</string>
+						<string key="inputArea">UIView</string>
+						<string key="msgTextField">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="bubbleCell">
 							<string key="name">bubbleCell</string>
 							<string key="candidateClassName">BubbleCell</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="myInputView">
-							<string key="name">myInputView</string>
+						<object class="IBToOneOutletInfo" key="chattingTableView">
+							<string key="name">chattingTableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="inputArea">
+							<string key="name">inputArea</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="myTableView">
-							<string key="name">myTableView</string>
-							<string key="candidateClassName">UITableView</string>
+						<object class="IBToOneOutletInfo" key="msgTextField">
+							<string key="name">msgTextField</string>
+							<string key="candidateClassName">UITextField</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

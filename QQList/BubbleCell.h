@@ -13,7 +13,6 @@
 @property (retain, nonatomic) IBOutlet UIImageView *bubbleView;
 @property (retain, nonatomic) IBOutlet UILabel *wordsLabel;
 
-- (void)setImage:(UIImage *) image;
 - (void)setWords:(NSString *) words fromSelf:(BOOL) flag;
 
 @end

@@ -151,6 +151,26 @@
     
 }
 
+- (IBAction)sendMessage:(id)sender
+{
+    ChattingData *newData = [[ChattingData alloc] initWithWords:[msgTextField text] Character:ChattingCharacterMe];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:newData, ME, nil];
+    
+    [chattingHistory addObject:dict];
+    [newData release];
+    [dict release];
+    
+    [chattingTableView reloadData];
+    [self scrollViewToEnd];
+}
+
+- (void)scrollViewToEnd
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chattingHistory count]-1 inSection:0];
+    
+    [chattingTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -164,18 +184,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSUInteger row = [indexPath row];
-//    
-//    NSDictionary *chatData = [chattingHistory objectAtIndex:row];
-//    NSString *key = [[chatData allKeys] lastObject];
-//    
-//    NSString *tmpWords = [[chatData valueForKey:key] words];
-//    
-//    CGSize wordsSize = [tmpWords sizeWithFont:[UIFont systemFontOfSize:16.0f]
-//                         constrainedToSize:CGSizeMake(200.0f, 2000.0f)
-//                             lineBreakMode:UILineBreakModeWordWrap];
+    NSUInteger row = [indexPath row];
     
-    return 80;
+    NSDictionary *chatData = [chattingHistory objectAtIndex:row];
+    NSString *key = [[chatData allKeys] lastObject];
+    
+    NSString *tmpWords = [[chatData valueForKey:key] words];
+    
+    CGSize wordsSize = [tmpWords sizeWithFont:[UIFont systemFontOfSize:16.0f]
+                         constrainedToSize:CGSizeMake(200.0f, 2000.0f)
+                             lineBreakMode:UILineBreakModeTailTruncation];
+//    NSLog(@"%f", 31 + wordsSize.height);
+    
+    return 4*2 + 31 + wordsSize.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -213,24 +234,5 @@
     return YES;
 }
 
-#pragma mark - Customed methods
-- (IBAction)sendMessage:(id)sender
-{
-    ChattingData *newData = [[ChattingData alloc] initWithWords:[msgTextField text] Character:ChattingCharacterMe];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:newData, ME, nil];
-    
-    [chattingHistory addObject:dict];
-    [newData release];
-    [dict release];
-    
-    [chattingTableView reloadData];
-    [self scrollViewToEnd];
-}
 
-- (void)scrollViewToEnd
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chattingHistory count]-1 inSection:0];
-    
-    [chattingTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
 @end
