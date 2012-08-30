@@ -67,10 +67,10 @@
             [chattingHistory addObject:dict];
         }
         
-    for (NSDictionary *data in chattingHistory) {
-        NSString *key = [[data allKeys] lastObject];
-        NSLog(@"%@", [[data valueForKey:key] words]);
-    }
+//    for (NSDictionary *data in chattingHistory) {
+//        NSString *key = [[data allKeys] lastObject];
+//        NSLog(@"%@", [[data valueForKey:key] words]);
+//    }
         
     }
 #endif
@@ -186,6 +186,8 @@
 {
     NSUInteger row = [indexPath row];
     
+    NSLog(@"%d", row);
+    
     NSDictionary *chatData = [chattingHistory objectAtIndex:row];
     NSString *key = [[chatData allKeys] lastObject];
     
@@ -194,9 +196,12 @@
     CGSize wordsSize = [tmpWords sizeWithFont:[UIFont systemFontOfSize:16.0f]
                          constrainedToSize:CGSizeMake(200.0f, 2000.0f)
                              lineBreakMode:UILineBreakModeTailTruncation];
-//    NSLog(@"%f", 31 + wordsSize.height);
+
+    CGFloat bubbleHeight = [key isEqualToString:ME] ? 29 : 31;
     
-    return 4*2 + 31 + wordsSize.height;
+    NSLog(@"%f, %f", wordsSize.height, (4*2 + bubbleHeight + wordsSize.height));
+    
+    return (4*2 + bubbleHeight + wordsSize.height);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -215,7 +220,9 @@
     NSDictionary *chatData = [chattingHistory objectAtIndex:row];
     NSString *key = [[chatData allKeys] lastObject];
     
-    [cell setWords:[[chatData valueForKey:key] words] fromSelf:NO];
+    BOOL isSelf = [key isEqualToString:ME];
+    
+    [cell setWords:[[chatData valueForKey:key] words] fromSelf:isSelf];
     
     
     return cell;

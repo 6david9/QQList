@@ -34,7 +34,7 @@
 			</object>
 			<object class="IBUITableViewCell" id="817858664">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">308</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="99969394">
 						<reference key="NSNextResponder" ref="817858664"/>
@@ -42,7 +42,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="463928997">
 								<reference key="NSNextResponder" ref="99969394"/>
-								<int key="NSvFlags">274</int>
+								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 4}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="99969394"/>
 								<reference key="NSWindow"/>
@@ -55,7 +55,7 @@
 							</object>
 							<object class="IBUILabel" id="1012991398">
 								<reference key="NSNextResponder" ref="99969394"/>
-								<int key="NSvFlags">274</int>
+								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{117, 11}, {42, 21}}</string>
 								<reference key="NSSuperview" ref="99969394"/>
 								<reference key="NSWindow"/>
@@ -108,9 +108,9 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="99969394"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClipsSubviews">YES</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="99969394"/>
 				<string key="IBUIReuseIdentifier">BubbleCell</string>
 			</object>

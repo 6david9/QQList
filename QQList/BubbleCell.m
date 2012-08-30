@@ -27,34 +27,54 @@
 
 #pragma mark - Customed methods
 
-- (void)setWords:(NSString *) words fromSelf:(BOOL)flag
+- (void)setWords:(NSString *) words fromSelf:(BOOL)fromSelf
 {
     
     CGSize wordsSize = [words sizeWithFont:[UIFont systemFontOfSize:16.0f]
                          constrainedToSize:CGSizeMake(200.0f, 2000.0f)
                              lineBreakMode:UILineBreakModeWordWrap];
     
-//    if (flag) {
-//        self.bubbleImage = [[UIImage imageNamed:@"bubbleSelf.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-//    } else {
-//        self.bubbleImage = [[UIImage imageNamed:@"bubble.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-//    }
-
-    self.bubbleView.image = [[UIImage imageNamed:@"bubble.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-    [self.bubbleView setOpaque:NO];
-    [self.bubbleView setClipsToBounds:YES];
-    [self.bubbleView setClearsContextBeforeDrawing:YES];
-    [self.bubbleView setBackgroundColor:[UIColor clearColor]];
-    [self.bubbleView setContentMode:UIViewContentModeScaleToFill];
-    self.bubbleView.frame = CGRectMake(30, 4, self.bubbleView.image.size.width + wordsSize.width, self.bubbleView.image.size.height + wordsSize.height);
+    if (fromSelf) {
+        
+        self.bubbleView.image = [[UIImage imageNamed:@"bubbleSelf-2.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+        [self.bubbleView setOpaque:NO];
+        [self.bubbleView setClipsToBounds:YES];
+        [self.bubbleView setClearsContextBeforeDrawing:YES];
+        [self.bubbleView setBackgroundColor:[UIColor clearColor]];
+        [self.bubbleView setContentMode:UIViewContentModeScaleToFill];
+        self.bubbleView.frame = CGRectMake(320-self.bubbleView.image.size.width-wordsSize.width, 4, self.bubbleView.image.size.width + wordsSize.width, self.bubbleView.image.size.height + wordsSize.height);
+        
+        // 通过计算坐标重叠
+        wordsLabel.frame = CGRectMake(21,14, wordsSize.width, wordsSize.height);
+        [wordsLabel setFont:[UIFont systemFontOfSize:16.0f]];
+        [wordsLabel setAdjustsFontSizeToFitWidth:NO];
+        [wordsLabel setNumberOfLines:0];
+        [wordsLabel setBackgroundColor:[UIColor clearColor]];
+        [wordsLabel setText:words];
+        [self.bubbleView addSubview:wordsLabel];
+        
+    } else {
+        
+        self.bubbleView.image = [[UIImage imageNamed:@"bubble-2.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+        [self.bubbleView setOpaque:NO];
+        [self.bubbleView setClipsToBounds:YES];
+        [self.bubbleView setClearsContextBeforeDrawing:YES];
+        [self.bubbleView setBackgroundColor:[UIColor clearColor]];
+        [self.bubbleView setContentMode:UIViewContentModeScaleToFill];
+        self.bubbleView.frame = CGRectMake(30, 4, self.bubbleView.image.size.width + wordsSize.width, self.bubbleView.image.size.height + wordsSize.height);
+        
+        // 通过计算坐标重叠
+        wordsLabel.frame = CGRectMake(21, 14, wordsSize.width, wordsSize.height);
+        [wordsLabel setLineBreakMode:UILineBreakModeTailTruncation];
+        [wordsLabel setFont:[UIFont systemFontOfSize:16.0f]];
+        [wordsLabel setAdjustsFontSizeToFitWidth:NO];
+        [wordsLabel setNumberOfLines:0];
+        [wordsLabel setBackgroundColor:[UIColor clearColor]];
+        [wordsLabel setText:words];
+        [self.bubbleView addSubview:wordsLabel];
+        
+    }
     
-    // 通过计算坐标重叠
-    wordsLabel.frame = CGRectMake(30 + 21, 4 + 14, wordsSize.width, wordsSize.height);
-    [wordsLabel setFont:[UIFont systemFontOfSize:16.0f]];
-    [wordsLabel setAdjustsFontSizeToFitWidth:NO];
-    [wordsLabel setNumberOfLines:0];
-    [wordsLabel setBackgroundColor:[UIColor clearColor]];
-    [wordsLabel setText:words];
     
     
 }
