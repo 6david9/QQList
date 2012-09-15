@@ -34,7 +34,7 @@
 			</object>
 			<object class="IBUITableViewCell" id="817858664">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">308</int>
+				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="99969394">
 						<reference key="NSNextResponder" ref="817858664"/>
@@ -59,6 +59,7 @@
 								<string key="NSFrame">{{117, 11}, {42, 21}}</string>
 								<reference key="NSSuperview" ref="99969394"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -109,6 +110,7 @@
 				<reference key="NSNextKeyView" ref="99969394"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<bool key="IBUIClipsSubviews">YES</bool>
+				<int key="IBUIContentMode">7</int>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="99969394"/>
@@ -196,7 +198,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">8</int>
+			<int key="maxID">9</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
