@@ -66,12 +66,6 @@
             
             [chattingHistory addObject:dict];
         }
-        
-//    for (NSDictionary *data in chattingHistory) {
-//        NSString *key = [[data allKeys] lastObject];
-//        NSLog(@"%@", [[data valueForKey:key] words]);
-//    }
-        
     }
 #endif
     
